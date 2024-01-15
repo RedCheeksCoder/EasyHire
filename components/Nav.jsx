@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 const Nav = () => {
-  const isUserLoggedIn = true;
+  const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [dropDown, setDropDown] = useState(false);
@@ -25,19 +25,20 @@ const Nav = () => {
         {" "}
         <Image
           src="/assets/images/EasyHire-Logo.svg"
-          width={35}
-          height={35}
+          width={30}
+          height={30}
           className="rounded-full"
+          alt="logo"
         />
         <p className="logo_text">EasyHire</p>
       </Link>
       {/* Desktop */}
       <div className="sm:flex hidden">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             {" "}
             <Link href="/create-jobpost" className="blue_btn">
-              Create Job Post
+              Post a Job
             </Link>
             <button type="button" onClick={signOut} className="outline_btn">
               {" "}
@@ -45,10 +46,11 @@ const Nav = () => {
             </button>
             <Link href="/profile">
               <Image
-                src="/assets/images/EasyHire-Logo.svg"
+                src={session?.user.image}
                 width={35}
                 height={35}
                 className="rounded-full"
+                alt="profile picture"
               />
             </Link>
           </div>
@@ -69,16 +71,17 @@ const Nav = () => {
       </div>
       {/* Mobile setup */}
       <div className="sm:hidden flex relative">
-        {isUserLoggedIn ? (
+        {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/EasyHire-Logo.svg"
-              width={35}
-              height={35}
+              src={session?.user.image}
+              width={30}
+              height={30}
               className="rounded-full cursor-pointer"
               onClick={() => {
                 setDropDown((prev) => !prev);
               }}
+              alt="profile picture"
             />
             {dropDown && (
               <div className="dropdown">

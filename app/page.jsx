@@ -1,8 +1,6 @@
 import JobPost from "@components/JobPost";
 import "@styles/globals.css";
 
-import Image from "next/image";
-
 export const metadata = {
   title: "EasyHire",
   description: "Simplifying Job search and connecting people",
