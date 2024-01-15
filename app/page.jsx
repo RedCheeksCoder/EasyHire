@@ -1,4 +1,4 @@
-import JobPost from "@components/JobPost";
+import Feed from "@components/Feed";
 import "@styles/globals.css";
 
 export const metadata = {
@@ -20,7 +20,7 @@ function Home() {
         Connecting job seekers with employers seamlessly. Simplifying job search
         and connection experience.
       </p>
-      <JobPost />
+      <Feed />
     </section>
   );
 }

@@ -33,8 +33,8 @@ const Form = ({ type, jobPost, setJobPost, submitting, handleSubmit }) => {
           </span>
 
           <textarea
-            value={jobPost.prompt}
-            onChange={(e) => setJobPost({ ...jobPost, prompt: e.target.value })}
+            value={jobPost.post}
+            onChange={(e) => setJobPost({ ...jobPost, post: e.target.value })}
             placeholder="Write your post here"
             required
             className="form_textarea "
