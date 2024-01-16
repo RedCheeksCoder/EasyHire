@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
+  const [bookmark, setBookmark] = useState();
   const pathName = usePathname();
   const router = useRouter();
   const handleProfileClick = () => {
@@ -15,6 +17,10 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
     router.push(
       `/profile/${jobPost.creator._id}?name=${jobPost.creator.username}`
     );
+  };
+
+  const handleBookMark = () => {
+    setBookmark(jobPost._id);
   };
 
   return (
@@ -39,6 +45,18 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
               {jobPost.creator.email}
             </p>
           </div>
+        </div>
+        <div className="copy_btn" onClick={handleBookMark}>
+          <Image
+            src={
+              bookmark
+                ? "/assets/icons/bookmark.svg"
+                : "/assets/icons/bookmark-filled.svg"
+            }
+            alt={"Job Post"}
+            width={12}
+            height={12}
+          />
         </div>
       </div>
       <p className="text-lg my-2 font-satoshi font-bold">

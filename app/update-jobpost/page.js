@@ -44,7 +44,6 @@ const EditJobPost = () => {
           tag: jobPost.tag,
         }),
       });
-      console.log(response);
 
       if (response.ok) {
         router.push("/");
