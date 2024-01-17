@@ -23,7 +23,7 @@ const CreateJobPost = () => {
         method: "POST",
         body: JSON.stringify({
           title: jobPost.title,
-          post: jobPost.prompt,
+          post: jobPost.post,
           userId: session?.user.id,
           tag: jobPost.tag,
         }),

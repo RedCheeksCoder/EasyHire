@@ -24,7 +24,7 @@ const Nav = () => {
       <Link href="/" className="flex gap-2 flex_center ">
         {" "}
         <Image
-          src="/assets/images/EasyHire-Logo.svg"
+          src="/assets/images/ehlogo.svg"
           width={30}
           height={30}
           className="rounded-full"

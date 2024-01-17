@@ -45,7 +45,7 @@ export const DELETE = async (request, { params }) => {
     await connectToDB();
 
     // Find the prompt by ID and remove it
-    await JobPost.findByIdAndRemove(params.id);
+    await JobPost.findByIdAndDelete(params.id);
 
     return new Response("Job Post deleted successfully", { status: 200 });
   } catch (error) {
