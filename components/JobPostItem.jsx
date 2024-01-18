@@ -3,17 +3,26 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
 
-  /* Bookmark States */
-  const [bookmark, setBookmark] = useState();
+  const [bookmark, setBookmark] = useState([]);
   const [saveJob, setSaveJob] = useState(true);
   const [userBookmarks, setUserBookmarks] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`/api/bookmark/${session?.user.id}`);
+      const data = await response.json();
+      console.log(data);
+    };
+
+    fetchData(); // Trigger the fetch when the relevant state changes
+  }, [saveJob]);
 
   /* Profile Click */
   const handleProfileClick = () => {
@@ -25,48 +34,20 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
     );
   };
 
-  const updateBookmarks = async () => {
-    try {
-      await fetch("/api/bookmark", {
-        method: "PATCH",
-        body: JSON.stringify({
-          bookmark: jobPost._id,
-        }),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   /* Bookmarking */
   const handleBookMark = async () => {
     setSaveJob((prev) => !prev);
-    console.log("savejob:", saveJob);
-
-    console.log("userBookmarks:", userBookmarks);
-    console.log("jobpost id:", jobPost._id);
-    console.log("session user id:", session?.user.id);
-
-    try {
-      await fetch("/api/bookmark", {
-        method: "POST",
-        body: JSON.stringify({
-          bookmark: ["65a78ab685dd01ea56a52f42", "65222518ab685dd01ea56a52f42"],
-        }),
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    /* const fetchBookmarks = async () => {
-      const response = await fetch(`/api/bookmark/`);
-      const data = await response.json();
-      setUserBookmarks(data);
-    };
-    fetchBookmarks(); */
-
-    //Update bookmark in database add or delete
+    setBookmark((bookmark) => {
+      const index = bookmark.indexOf(jobPost._id);
+      if (index !== -1) {
+        return [...bookmark.slice(0, index), ...bookmark.slice(index + 1)];
+      } else {
+        return [...bookmark, jobPost._id];
+      }
+    });
   };
+
+  //Update bookmark in database add or delete
 
   return (
     <div className="prompt_card">
