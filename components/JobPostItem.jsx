@@ -3,26 +3,14 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
-
-  const [bookmark, setBookmark] = useState([]);
-  const [saveJob, setSaveJob] = useState(true);
-  const [userBookmarks, setUserBookmarks] = useState();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`/api/bookmark/${session?.user.id}`);
-      const data = await response.json();
-      console.log(data);
-    };
-
-    fetchData(); // Trigger the fetch when the relevant state changes
-  }, [saveJob]);
+  const [copyEmail, setCopyEmail] = useState("");
 
   /* Profile Click */
   const handleProfileClick = () => {
@@ -34,20 +22,19 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
     );
   };
 
-  /* Bookmarking */
-  const handleBookMark = async () => {
-    setSaveJob((prev) => !prev);
-    setBookmark((bookmark) => {
-      const index = bookmark.indexOf(jobPost._id);
-      if (index !== -1) {
-        return [...bookmark.slice(0, index), ...bookmark.slice(index + 1)];
-      } else {
-        return [...bookmark, jobPost._id];
-      }
-    });
+  const handleSendEmail = () => {
+    console.log("Meowth");
+    setCopyEmail(jobPost.creator?.email);
+    navigator.clipboard.writeText(jobPost.creator?.email);
+    setTimeout(() => {
+      setCopyEmail(false);
+      alert("Redirecting to google mail");
+      window.open(
+        "https://mail.google.com/mail/u/0/#inbox?compose=new",
+        "_blank"
+      );
+    }, 1500);
   };
-
-  //Update bookmark in database add or delete
 
   return (
     <div className="prompt_card">
@@ -68,22 +55,26 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
               {jobPost.creator?.username}
             </h3>
             <p className="font-inter text-sm text-gray-500">
-              {jobPost.creator?.email}
+              {session ? jobPost.creator?.email : "*************"}
             </p>
           </div>
         </div>
-        <div className="copy_btn" onClick={handleBookMark}>
-          <Image
-            src={
-              saveJob
-                ? "/assets/icons/bookmark.svg"
-                : "/assets/icons/bookmark-filled.svg"
-            }
-            alt={saveJob ? "bookmark-filled" : "bookmark"}
-            width={12}
-            height={12}
-          />
-        </div>
+        {session ? (
+          <div className="copy_btn" onClick={handleSendEmail}>
+            <Image
+              src={
+                copyEmail === jobPost.creator?.email
+                  ? "/assets/icons/tick.svg"
+                  : "/assets/icons/copy.svg"
+              }
+              alt={"Email the hiring team"}
+              width={15}
+              height={15}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <p className="text-lg my-2 font-satoshi font-bold">
         Looking for {jobPost?.title}

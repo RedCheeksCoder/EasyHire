@@ -5,25 +5,12 @@ export const GET = async (request, { params }) => {
   try {
     await connectToDB();
 
-    const bookmark = await Bookmark.findById(params.id).populate("creator");
+    const bookmark = await Bookmark.findById({ creator: params.id });
     if (!bookmark) return new Response("Bookmark not found", { status: 404 });
 
     return new Response(JSON.stringify(bookmark), { status: 200 });
   } catch (error) {
     return new Response("Internal Server Error", { status: 500 });
-  }
-};
-export const POST = async (request) => {
-  const { userId, bookmark } = await request.json();
-
-  try {
-    await connectToDB();
-    const newBookmark = new Bookmark({ creator: userId, bookmark });
-
-    await newBookmark.save();
-    return new Response(JSON.stringify(newBookmark), { status: 201 });
-  } catch (error) {
-    return new Response("Failed to create add new bookmark", { status: 500 });
   }
 };
 

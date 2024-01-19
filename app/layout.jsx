@@ -1,6 +1,7 @@
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import "@styles/globals.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Lakbay PH",
