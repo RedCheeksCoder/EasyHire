@@ -1,8 +1,7 @@
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import "@styles/globals.css";
-import toast, { Toaster } from "react-hot-toast";
-
+import Head from "next/head";
 export const metadata = {
   title: "Lakbay PH",
   description: "Live like in your own home. Booking cheaper than hotels.",
@@ -11,6 +10,9 @@ export const metadata = {
 function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
       <body>
         <Provider>
           <div className="main"></div>
