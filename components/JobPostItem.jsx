@@ -79,7 +79,7 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
       <p className="text-lg my-2 font-satoshi font-bold">
         Looking for {jobPost?.title}
       </p>
-      <p className="my-4 font-satoshi text-sm text-gray-700 whitespace-pre-wrap">
+      <p className="my-4 font-satoshi text-sm text-gray-700 whitespace-pre-wrap text">
         {jobPost?.post}
       </p>
       <p
