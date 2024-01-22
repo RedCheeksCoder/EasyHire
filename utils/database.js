@@ -5,8 +5,8 @@ let isConnected = false;
 
 export const connectToDB = async () => {
   mongoose.set("strictQuery", true);
-  mongoose.set("useNewUrlParser", true);
-  mongoose.set("useUnifiedTopology", true);
+  /*   mongoose.set("useNewUrlParser", true);
+  mongoose.set("useUnifiedTopology", true); */
   if (isConnected) {
     console.log("MongoDB is already connected");
     return;
