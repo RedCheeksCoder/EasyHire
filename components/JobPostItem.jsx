@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import ReadMore from "./ReadMore";
 
 const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
@@ -78,9 +79,7 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
       <p className="text-lg my-2 font-satoshi font-bold">
         Looking for {jobPost?.title}
       </p>
-      <p className="my-4 font-satoshi text-sm text-gray-700 whitespace-pre-wrap text">
-        {jobPost?.post}
-      </p>
+      <ReadMore text={jobPost?.post} />
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(jobPost?.tag)}>
