@@ -25,14 +25,13 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
+  const fetchJobPosts = async () => {
+    const response = await fetch("/api/jobPost");
+    const data = await response.json();
+
+    setAllJobPosts(data);
+  };
   useEffect(() => {
-    const fetchJobPosts = async () => {
-      const response = await fetch("/api/jobPost");
-      const data = await response.json();
-
-      setAllJobPosts(data);
-    };
-
     fetchJobPosts();
   }, []);
 

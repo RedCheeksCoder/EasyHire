@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import { useState } from "react";
 
 const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
