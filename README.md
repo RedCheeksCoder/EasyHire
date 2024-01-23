@@ -31,6 +31,16 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
+##Description
+Welcome to EasyHire, the ultimate solution for streamlined job connections. We're about to uncover the unparalleled features that make EasyHire the pinnacle of online hiring platforms.
+As we delve into the platform, you'll immediately notice the sleek and user-friendly interface, a testament to the sophistication of its development using Next JS, Tailwind, and MongoDB. EasyHire ensures a seamless user experience for both employers and job seekers alike.
+
+##Features:
+- CRUD for job post
+- Search a tag
+- Search a user
+- Google authentication
+
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
