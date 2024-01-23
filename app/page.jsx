@@ -20,7 +20,7 @@ function Home() {
         Connecting job seekers with employers seamlessly. Simplifying job search
         and connection experience.
       </p>
-      <Feed displayJobPost={displayJobPost} />
+      <Feed />
     </section>
   );
 }
