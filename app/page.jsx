@@ -1,5 +1,6 @@
 import Feed from "@components/Feed";
 import "@styles/globals.css";
+import { useState } from "react";
 
 export const metadata = {
   title: "EasyHire",
@@ -7,6 +8,8 @@ export const metadata = {
 };
 
 function Home() {
+  const [displayJobPost, setDisplayJobPost] = useState(false);
+  setDisplayJobPost((prev) => !prev);
   return (
     <section className="section_setup">
       <h1 className="head_text text-center">
@@ -20,7 +23,7 @@ function Home() {
         Connecting job seekers with employers seamlessly. Simplifying job search
         and connection experience.
       </p>
-      <Feed />
+      <Feed displayJobPost={displayJobPost} />
     </section>
   );
 }

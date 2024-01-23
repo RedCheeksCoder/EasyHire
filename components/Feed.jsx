@@ -1,9 +1,6 @@
 "use client";
-
 import { useState, useEffect } from "react";
-
 import JobPostItem from "./JobPostItem";
-import { useRouter } from "next/navigation";
 
 const JobPosts = ({ data, handleTagClick }) => {
   return (
@@ -19,13 +16,13 @@ const JobPosts = ({ data, handleTagClick }) => {
   );
 };
 
-const Feed = () => {
+const Feed = ({ displayJobPost }) => {
   const [allJobPosts, setAllJobPosts] = useState([]);
   // Search states
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
-  const router = useRouter();
+
   const fetchJobPosts = async () => {
     const response = await fetch("/api/jobPost");
     const data = await response.json();
@@ -34,17 +31,7 @@ const Feed = () => {
   };
   useEffect(() => {
     fetchJobPosts();
-
-    const handleRouteChange = (url) => {
-      if (url === "/") {
-        fetchJobPosts();
-      }
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router]);
+  }, [displayJobPost]);
 
   const filterJobPosts = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
