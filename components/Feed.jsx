@@ -31,9 +31,8 @@ const Feed = () => {
 
     setAllJobPosts(data);
   };
-  useEffect(() => {
-    fetchJobPosts();
-  }, []);
+
+  fetchJobPosts();
 
   const filterJobPosts = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
