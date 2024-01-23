@@ -27,7 +27,7 @@ const Feed = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const fetchJobPosts = async () => {
-    const response = await fetch("/api/jobPost");
+    const response = await fetch("/api/jobPost", { cache: "no-store" });
     const data = await response.json();
 
     setAllJobPosts(data);
