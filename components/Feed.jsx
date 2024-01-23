@@ -32,7 +32,7 @@ const Feed = () => {
   };
   useEffect(() => {
     fetchJobPosts();
-  }, [router.pathname]);
+  }, [router.pathname, session?.user.id]);
 
   const filterJobPosts = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
