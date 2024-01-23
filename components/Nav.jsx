@@ -3,10 +3,11 @@
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 const Nav = () => {
   const { data: session } = useSession();
-
+  const router = useRouter();
   const [providers, setProviders] = useState(null);
   const [dropDown, setDropDown] = useState(false);
 
@@ -101,6 +102,7 @@ const Nav = () => {
                   type="button"
                   onClick={() => {
                     setDropDown(false);
+                    router.push("/");
                     signOut();
                   }}
                   className="blue_btn w-full mt-5">
