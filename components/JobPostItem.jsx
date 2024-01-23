@@ -79,7 +79,7 @@ const JobPostItem = ({ jobPost, handleEdit, handleDelete, handleTagClick }) => {
       <p className="text-lg my-2 font-satoshi font-bold">
         Looking for {jobPost?.title}
       </p>
-      <ReadMore text={jobPost?.post} />
+      {session?.user.id ? <ReadMore text={jobPost?.post} /> : ""}
       <p
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(jobPost?.tag)}>

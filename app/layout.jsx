@@ -3,8 +3,8 @@ import Provider from "@components/Provider";
 import "@styles/globals.css";
 import Head from "next/head";
 export const metadata = {
-  title: "Lakbay PH",
-  description: "Live like in your own home. Booking cheaper than hotels.",
+  title: "Easy Hire",
+  description: "Simplifying Job search and connecting people.",
 };
 
 function RootLayout({ children }) {
