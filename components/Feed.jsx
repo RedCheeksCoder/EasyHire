@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 
 import JobPostItem from "./JobPostItem";
+import { useRouter } from "next/navigation";
 
 const JobPosts = ({ data, handleTagClick }) => {
   return (
@@ -24,7 +25,7 @@ const Feed = () => {
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
-
+  const router = useRouter();
   const fetchJobPosts = async () => {
     const response = await fetch("/api/jobPost");
     const data = await response.json();
@@ -33,7 +34,17 @@ const Feed = () => {
   };
   useEffect(() => {
     fetchJobPosts();
-  }, [searchText]);
+
+    const handleRouteChange = (url) => {
+      if (url === "/") {
+        fetchJobPosts();
+      }
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router]);
 
   const filterJobPosts = (searchtext) => {
     const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
