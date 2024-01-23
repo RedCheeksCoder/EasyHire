@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import JobPostItem from "./JobPostItem";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const JobPosts = ({ data, handleTagClick }) => {
   return (
@@ -24,6 +25,7 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
   const router = useRouter();
+  const { data: session } = useSession();
   const fetchJobPosts = async () => {
     const response = await fetch("/api/jobPost");
     const data = await response.json();
